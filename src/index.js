@@ -76,6 +76,6 @@
 
 // **Оскільки ініціалізація сервера тепер відбувається у файлі src/server.js, то вміст файлу src/index.js буде виглядати наступним чином: */
 
-import { startServer } from './server';
+import { startServer } from './server.js';
 
 startServer();
