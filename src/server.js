@@ -1,7 +1,3 @@
-//src/server.js
-
-// src/server.js
-
 import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
@@ -38,7 +34,7 @@ export const startServer = () => {
 
   app.use((err, req, res, next) => {
     res.status(500).json({
-      message: 'Something went wrong',
+      message: 'Something went really wrong',
       error: err.message,
     });
   });
