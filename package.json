@@ -24,5 +24,13 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "pino-http": "^10.5.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YuriiUsername/nodejs-basics.git"
+  },
+  "bugs": {
+    "url": "https://github.com/YuriiUsername/nodejs-basics/issues"
+  },
+  "homepage": "https://github.com/YuriiUsername/nodejs-basics#readme"
 }
