@@ -5,6 +5,9 @@ import crypto from 'node:crypto';
 
 import { getEnvVar } from './utils/getEnvVar.js';
 
+//Імпортуємо функції сервісу students та використовуємо їх у контролерах:
+import { getAllStudents, getStudentById } from './services/students.js';
+
 const PORT = Number(getEnvVar('PORT', '3000'));
 
 export const startServer = () => {
@@ -44,6 +47,37 @@ export const startServer = () => {
     res.status(500).json({
       message: 'Something went really wrong',
       error: err.message,
+    });
+  });
+
+  /**створимо два нових маршрути для GET-запитів:
+   * /students - маршрут для отримання колекції всіх студентів
+   * /students/:studentId - маршрут для отримання студента за його id
+   */
+
+  app.get('/students', async (req, res) => {
+    const students = await getAllStudents();
+
+    res.status(200).json({
+      data: students,
+    });
+  });
+
+  app.get('/students/:studentId', async (req, res, next) => {
+    const { studentId } = req.params;
+    const student = await getStudentById(studentId);
+
+    // Відповідь, якщо контакт не знайдено
+    if (!student) {
+      res.status(404).json({
+        message: 'Student not found',
+      });
+      return;
+    }
+
+    // Відповідь, якщо контакт знайдено
+    res.status(200).json({
+      data: student,
     });
   });
 
