@@ -75,7 +75,20 @@
 //.................................................//
 
 // **Оскільки ініціалізація сервера тепер відбувається у файлі src/server.js, то вміст файлу src/index.js буде виглядати наступним чином: */
+//..............................
+// import { startServer } from './server.js';
 
+// startServer();
+//.............................................
+
+/**Тепер у файлі src/index.js ми створимо функцію bootstrap, яка буде ініціалізувати підключення до бази даних, після чого запускати сервер. */
+
+import { initMongoDB } from './db/initMongoDB.js';
 import { startServer } from './server.js';
 
-startServer();
+const bootstrap = async () => {
+  await initMongoDB();
+  startServer();
+};
+
+bootstrap();
