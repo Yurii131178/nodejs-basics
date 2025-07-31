@@ -1,7 +1,7 @@
 import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
-import crypto from 'node:crypto';
+// import crypto from 'node:crypto';
 
 import { getEnvVar } from './utils/getEnvVar.js';
 
@@ -24,18 +24,18 @@ export const startServer = () => {
     }),
   );
   // middleware fo id generation
-  app.use((req, res, next) => {
-    req.id = crypto.randomUUID();
-    next();
-  });
+  // app.use((req, res, next) => {
+  //   req.id = crypto.randomUUID();
+  //   next();
+  // });
 
-  // controller
-  app.get('/', (req, res) => {
-    res.json({
-      message: 'Hello world!',
-      id: req.id,
-    });
-  });
+  // // controller
+  // app.get('/', (req, res) => {
+  //   res.json({
+  //     message: 'Hello world!',
+  //     id: req.id,
+  //   });
+  // });
 
   /**створимо два нових маршрути для GET-запитів:
    * /students - маршрут для отримання колекції всіх студентів
@@ -75,12 +75,13 @@ export const startServer = () => {
     });
   });
 
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
   app.use((req, res, next) => {
     res.status(404).json({
       message: 'Not found',
     });
+  });
+
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
   });
 };
